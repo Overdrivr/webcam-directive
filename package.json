@@ -35,6 +35,7 @@
     "karma-phantomjs-launcher": "~0.1.1",
     "karma-requirejs": "~0.2.0",
     "karma-script-launcher": "~0.1.0",
+    "lite-server": "^2.2.2",
     "matchdep": "~0.1.1",
     "phantomjs": "~1.9.2-6",
     "requirejs": "~2.1.9"
@@ -43,7 +44,8 @@
     "node": ">=0.8.0"
   },
   "scripts": {
-    "test": "grunt ci"
+    "test": "grunt ci",
+    "dev": "lite-server"
   },
   "repository": "git@github.com:jonashartmann/webcam-directive.git"
 }

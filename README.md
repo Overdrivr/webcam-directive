@@ -77,7 +77,13 @@ function MyController($scope) {
 </webcam>
 ```
 
+## Running the example
 
+```
+npm run dev
+```
+
+Then navigate to `localhost:8000/example/index.html`
 
 ## Contribute
 
