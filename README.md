@@ -83,7 +83,7 @@ function MyController($scope) {
 npm run dev
 ```
 
-Then navigate to `localhost:8000/example/index.html`
+Then navigate to `localhost:8000/example/responsive.html`
 
 ## Contribute
 
