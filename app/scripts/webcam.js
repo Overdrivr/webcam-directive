@@ -35,7 +35,9 @@ angular.module('webcam', [])
         onStream: '&',
         onStreaming: '&',
         placeholder: '=',
-        config: '=channel'
+        config: '=?channel',
+        responsive: '=',
+        maxResolution: '='
       },
       link: function postLink($scope, element) {
         var videoElem = null,
@@ -129,6 +131,20 @@ angular.module('webcam', [])
           }
 
           var mediaConstraint = { video: true, audio: false };
+
+          if($scope.maxResolution) {
+            mediaConstraint.video = {
+              optional: [
+                {minWidth: 320},
+                {minWidth: 640},
+                {minWidth: 1024},
+                {minWidth: 1280},
+                {minWidth: 1920},
+                {minWidth: 2560},
+              ]
+            };
+          }
+
           navigator.getMedia(mediaConstraint, onSuccess, onFailure);
 
           /* Start streaming the webcam data when the video element can play
@@ -136,11 +152,16 @@ angular.module('webcam', [])
            */
           videoElem.addEventListener('canplay', function() {
             if (!isStreaming) {
-              var scale = width / videoElem.videoWidth;
-              height = (videoElem.videoHeight * scale) ||
-                        $scope.config.videoHeight;
-              videoElem.setAttribute('width', width);
-              videoElem.setAttribute('height', height);
+              if($scope.responsive) {
+                videoElem.style.width = '100%';
+                videoElem.style.height = 'auto';
+              } else {
+                var scale = width / videoElem.videoWidth;
+                height = (videoElem.videoHeight * scale) ||
+                $scope.config.videoHeight;
+                videoElem.setAttribute('width', width);
+                videoElem.setAttribute('height', height);
+              }
               isStreaming = true;
 
               $scope.config.video = videoElem;
